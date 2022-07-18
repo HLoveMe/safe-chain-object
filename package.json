@@ -1,0 +1,71 @@
+{
+  "name": "safe-chain-object",
+  "version": "1.0.3",
+  "description": "",
+  "types": "index.d.ts",
+  "main": "./dist/cjs/index.min.js",
+  "module": "./dist/esm5/index.js",
+  "es2015": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "node": "./dist/cjs/index.js",
+      "require": "./dist/cjs/index.js",
+      "es2015": "./dist/esm/index.js",
+      "default": "./dist/esm5/index.js"
+    },
+    "./operators": {
+      "types": "./dist/types/operators/index.d.ts",
+      "node": "./dist/cjs/operators/index.js",
+      "require": "./dist/cjs/operators/index.js",
+      "es2015": "./dist/esm/operators/index.js",
+      "default": "./dist/esm5/operators/index.js"
+    }
+  },
+  "scripts": {
+    "test": "start ./test/index.html",
+    "dev": " webpack --config webpack.config.js",
+    "build": "tsc -p ./config/tsconfig.esm.json && tsc -p ./config/tsconfig.esm5.json && tsc -p  ./config/tsconfig.cjs.json && tsc -p ./config/tsconfig.types.json && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HLoveMe/safe-chain-object.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HLoveMe/safe-chain-object/issues"
+  },
+  "files": [
+    "operators",
+    "config",
+    "config/**/!(*.tsbuildinfo)",
+    "dist",
+    "src",
+    "index.d.ts",
+    "package.json",
+    "readme.md"
+  ],
+  "devDependencies": {
+    "tslib": "^2.4.0",
+    "@babel/core": "^7.16.12",
+    "@babel/plugin-proposal-optional-chaining": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.18.6",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/runtime": "^7.18.6",
+    "@babel/runtime-corejs3": "^7.18.6",
+    "babel-loader": "^8.2.3",
+    "terser-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.2.7",
+    "typescript": "^4.6.2",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  },
+  "homepage": "https://github.com/HLoveMe/safe-chain-object#readme",
+  "keywords": [
+    "safe",
+    "safe-chain-object"
+  ],
+  "dependencies": {}
+}

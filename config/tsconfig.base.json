@@ -1,0 +1,22 @@
+{
+  "extends":"../tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": false,
+  },
+  "include": [
+    "../src/**/*.ts",
+    "../src/**/*.js",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

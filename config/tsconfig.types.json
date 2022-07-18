@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "noEmit": false,
+    "composite": true,
+    "module": "es2015",
+    "target": "esnext",
+    "importHelpers": false,
+    "removeComments": false,
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "../dist/types",
+    "moduleResolution":"node",
+    "emitDeclarationOnly": true,
+    "rootDir":"../src",
+    "baseUrl": "../src",
+  },
+  "include": [
+    "../src/**/**/*.ts",
+  ],
+}

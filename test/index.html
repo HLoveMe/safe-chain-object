@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="application/javascript" src="../dist/bundles/index.js"></script>
+</head>
+
+<body>
+  <div id="test"></div>
+</body>
+<script>
+  var test = document.getElementById('test');
+  const {
+    createSafe,
+    ObjectEnumType,
+    isArray,
+    isNumber,
+    isEqual,
+    isBoolean,
+    isMap,
+    isString,
+    shape
+  } = window.Safe
+
+  function createTest(run) {
+    const div = document.createElement('div');
+    test.appendChild(div);
+    const {
+      desc,
+      success
+    } = run();
+    div.innerHTML = `${desc}---- ${success ? '√':'×'} `
+    div.style.color = success ? "black" : "red"
+  }
+
+  createTest(() => {
+    class Test01 {
+      name = "test"
+    }
+    const source = createSafe({
+      data: new Test01()
+    });
+    return {
+      desc: 'Test instanceof',
+      success: source.data.instanceof(Test01) === true
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: [1, 2, 3]
+    });
+    return {
+      desc: 'Test isObjectTypeOf',
+      success: source.data.isObjectTypeOf(ObjectEnumType.Array) === true
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: [1, 2, 3]
+    }, null);
+    let success = true;
+    success = success && source.data.isNull() === false
+    success = success && source.x.y.c.isNull() === true
+    return {
+      desc: 'Test isNull',
+      success
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: [1, 2, 3]
+    }, undefined);
+    let success = true;
+    success = success && source.data.isUndefined() === false
+    success = success && source.x.y.c.isUndefined() === true
+    return {
+      desc: 'Test isUndefined',
+      success
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: 100
+    }, undefined);
+    return {
+      desc: 'Test isNumber',
+      success: source.data.isNumber()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: 'test'
+    }, undefined);
+    return {
+      desc: 'Test isString',
+      success: source.data.isString()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: true
+    }, undefined);
+    return {
+      desc: 'Test isBoolean',
+      success: source.data.isBoolean()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: () => {}
+    }, undefined);
+    return {
+      desc: 'Test isFunction',
+      success: source.data.isFunction()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: Symbol.for('11')
+    }, undefined);
+    return {
+      desc: 'Test isSymbol',
+      success: source.data.isSymbol()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: new Date()
+    }, undefined);
+    return {
+      desc: 'Test isDate',
+      success: source.data.isDate()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: /.+/g
+    }, undefined);
+    return {
+      desc: 'Test isRegExp',
+      success: source.data.isRegExp()
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: Promise.all([])
+    }, undefined);
+    return {
+      desc: 'Test isPromise',
+      success: source.data.isPromise()
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: []
+    }, undefined);
+    return {
+      desc: 'Test isArray',
+      success: source.data.isArray()
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: new Map()
+    }, undefined);
+    return {
+      desc: 'Test isMap',
+      success: source.data.isMap()
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: new Set()
+    }, undefined);
+    return {
+      desc: 'Test isSet',
+      success: source.data.isSet()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: '1111'
+    }, undefined);
+    return {
+      desc: 'Test isTruly',
+      success: source.data.isTruly()
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: '1111'
+    }, undefined);
+    return {
+      desc: 'Test isEqual',
+      success: source.data.isEqual('1111')
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: 1111
+    }, undefined);
+    return {
+      desc: 'Test isEqual - isDepth',
+      success: source.data.isEqual('1111', true) === false
+    }
+  })
+
+
+  createTest(() => {
+    const source = createSafe({
+      data: [1]
+    }, undefined);
+    return {
+      desc: 'Test isEmpty',
+      success: source.data.isEmpty() === false
+    }
+  })
+
+  createTest(() => {
+    class Test {}
+    const source = createSafe({
+      data: [new Test(), new Test()]
+    }, undefined);
+    return {
+      desc: 'Test arrayEvery 1',
+      success: source.data.arrayEvery(Test)
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: [1, 2, 3, 4, 5, 9]
+    }, undefined);
+    return {
+      desc: 'Test arrayEvery 2',
+      success: source.data.arrayEvery(($1) => $1 <= 5) === false
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: [1, 2, 3, 4, 5, 9]
+    }, undefined);
+    return {
+      desc: 'Test validator- isArray',
+      success: source.data.validator(isArray)
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: 1
+    }, undefined);
+    return {
+      desc: 'Test validator- isNumber isEqual',
+      success: source.data.validator(isNumber, isEqual(1))
+    }
+  })
+
+  createTest(() => {
+    const source = createSafe({
+      data: {
+        name: '无名',
+        age: 111,
+        cc: []
+      }
+    }, undefined);
+    return {
+      desc: 'Test validator- shape-1',
+      success: source.data.validator(shape({
+        cc: isMap,
+        age: isNumber
+      })) === false
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: {
+        name: '无名1',
+        age: 111,
+        cc: []
+      }
+    }, undefined);
+    return {
+      desc: 'Test validator- shape-2',
+      success: source.data.validator(shape({
+        name: isString,
+        cc: isArray
+      }))
+    }
+  })
+  createTest(() => {
+    const source = createSafe({
+      data: {
+        a: {
+          aa: [11],
+          aaa: 1
+        },
+        b: true
+      }
+    }, undefined);
+    return {
+      desc: 'Test validator- shape-3',
+      success: source.data.validator(
+        shape({
+          a: shape({
+            aa: isArray,
+            aaa: isNumber,
+          }),
+          b: isBoolean,
+        })
+      )
+    }
+  })
+</script>
+
+</html>
