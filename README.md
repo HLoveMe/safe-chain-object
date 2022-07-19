@@ -6,7 +6,7 @@ safe-chain-object 解决 Javascript 项目中，对值进行数据类型，值�
 
 - 安装
   ```
-  npm i git+https://github.com/HLoveMe/safe-chain-object.git
+  npm i safe-chain-object
   ```
 - 引用和使用
   ```typescript 
