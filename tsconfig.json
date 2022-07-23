@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "preserve",
-    "importHelpers": false,
+    "importHelpers": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "allowJs": true,
@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
     "baseUrl": ".",
-    "lib": [ "es2015", "dom" ],
+    "lib": [ "es2017", "dom" ],
   },
   "include": [
     "src/**/*.ts",

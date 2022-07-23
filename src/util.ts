@@ -40,7 +40,7 @@ const getThisOrSuperPro = function (
 
 const getTop = () => {
   var freeGlobal =
-    typeof global == 'object' && global && global.Object === Object && global;
+    typeof globalThis == 'object' && globalThis && globalThis.Object === Object && globalThis;
 
   var freeSelf =
     typeof self == 'object' && self && self.Object === Object && self;
