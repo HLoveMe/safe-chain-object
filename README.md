@@ -9,25 +9,26 @@ safe-chain-object 解决 Javascript 项目中，对值进行数据类型，值�
   npm i safe-chain-object
   ```
 - 引用和使用
-  ```typescript 
-  import { createSafe as $_} = from 'safe-chain-object'; 
-  const data:any = {code:200,message:'success',data:[]} 
-  const _data = $_(data) 
-  if(_data.data.isArray() && _data.code.isEqual(200)){ 
-    //do something 
-  } 
+
+  ```typescript
+  import { createSafe as $_} = from 'safe-chain-object';
+  const data:any = {code:200,message:'success',data:[]}
+  const _data = $_(data)
+  if(_data.data.isArray() && _data.code.isEqual(200)){
+    //do something
+  }
   ```
 
-  ```typescript 
-  import { createSafe as $_} = from 'safe-chain-object'; 
-  const data:any = {code:200,message:'success',data:{}} 
-  const _data = $_(data) //可无限取值， 解决undefined 引发的崩溃问题 
-  if(_data.data.message.code.isEqual(200)){ 
-    // 
+  ```typescript
+  import { createSafe as $_} = from 'safe-chain-object';
+  const data:any = {code:200,message:'success',data:{}}
+  const _data = $_(data) //可无限取值， 解决undefined 引发的崩溃问题
+  if(_data.data.message.code.isEqual(200)){
+    //
     }
   ```
 
-##更多用法
+## 更多用法
 
 ### 类型判断。这里提供一个可选链的判断并提供便捷函数。
 
@@ -55,9 +56,12 @@ function renderItemView(result:FetchData){
 }
 ```
 
+### 操作符 简化操作
+
 ```typescript
 import { createSafe } = from  'safe-chain-object';
 import { isNumber ,shape,isString ,isEqual} = from  'safe-chain-object/operators';
+
 // dome1
 const source1 =createSafe({data:100});
 source1.data.validator(isNumber,isEqual(100))
@@ -72,7 +76,9 @@ source2.validator(shape({
 }))
 ```
 
-## 工具链
+## API说明
+
+### 工具链
 
 ```typescript
 instanceof(prototype: Function): boolean;
@@ -90,7 +96,6 @@ isPromise(): boolean;
 isArray(): boolean;
 isMap(): boolean;
 isSet(): boolean;
-// 字面量 会转为对应的数据对象。1==>Number false==>Boolean ''===>String
 isEqual(target: any): boolean;
 isTruly(): boolean;
 // 判断数据是否全部为true
@@ -113,6 +118,29 @@ isEmpty(): boolean;
 
 validator(...args:Function[]):boolean;
 ```
+
+### 操作符
+
+```typescript
+const isEqual: (target: any, isDepth?: boolean) => ExecFunction;
+const isNull: ExecFunction;
+const isUndefined: ExecFunction;
+const isNumber: ExecFunction;
+const isString: ExecFunction;
+const isBoolean: ExecFunction;
+const isObject: ExecFunction;
+const isSymbol: ExecFunction;
+const isFunction: ExecFunction;
+const isDate: ExecFunction;
+const isRegExp: ExecFunction;
+const isPromise: ExecFunction;
+const isArray: ExecFunction;
+const isSet: ExecFunction;
+const isMap: ExecFunction;
+const shape: (space: Space) => ExecFunction;
+```
+
+### 详细说明
 
 - 功能说明
 
